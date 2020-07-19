@@ -1,0 +1,201 @@
+/*
+* Styles for main site layout
+*/
+
+/* ****************** */
+/* BASE STYLES */
+/* ****************** */
+
+html {
+	//https://www.client9.com/css-system-font-stack-sans-serif-v3
+	font-family: $sans-font-family;	
+	font-size: 20px;
+	line-height: 1.667em;
+	color: #333;
+}
+
+.background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #fafafa;
+	z-index: -42;
+}
+
+// For details on ideal characters per line: https://en.wikipedia.org/wiki/Line_length
+.body-content {
+	max-width: 33rem; // 0.5rem per 1 character ~= 66 characters per line
+	padding: 0 1.5rem; // -6 characters per line ~= 60 characters per line
+	margin: 0 auto 2rem auto; // centers content
+}
+
+/* ************** */
+/* BASE STYLES */
+/* ************** */
+
+html {
+	//https://www.client9.com/css-system-font-stack-sans-serif-v3
+	font-family: $sans-font-family;	
+	font-size: 20px;
+	line-height: 1.667em;
+	color: #333;
+}
+
+.background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #fafafa;
+	z-index: -42;
+}
+
+// For details on ideal characters per line: https://en.wikipedia.org/wiki/Line_length
+.body-content {
+	max-width: 33rem; // 0.5rem per 1 character ~= 66 characters per line
+	padding: 0 1.5rem; // -6 characters per line ~= 60 characters per line
+	margin: 0 auto 2rem auto; // centers content
+}
+
+code {
+	// https://www.client9.com/css-system-font-stack-monospace-v2
+	font-family: $code-font-family;
+}
+
+// If #DayNightToggle is checked, website is in day reading mode (with light colours and dark text)
+#DayNightToggle:checked ~ .body-content {
+	color: #333;
+	background-color: #fafafa;
+}
+
+/* ****************** */
+/* GLOBAL LINKS*/
+/* ****************** */
+
+a, label {
+	text-decoration: none;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+/* From: https://webaim.org/techniques/css/invisiblecontent/ */
+a.skip {
+	display: block;
+	position:absolute;
+	z-index: -100;
+	width:0rem;
+	height:0rem;
+	overflow: hidden;
+	text-align: center;
+	&:focus {
+		position:static;
+		width:auto;
+		height:auto;
+		margin-bottom: 1rem;
+		z-index: auto;
+	}
+}
+
+/* **************************** */
+/* HEADER AND FOOTER */
+/* **************************** */
+
+.site-header {
+	@extend %underline;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	// Layout - See https://www.w3schools.com/howto/howto_css_two_columns.asp
+	.header-left, header-right {
+		float: left;
+		height: 6.5rem;
+	}
+	.header-left {
+		width: 20%;
+	}
+	.header-right {
+		width: 80%;
+		margin-left: auto;
+		text-align: center;
+		border-left: $border-layout;
+		border-top: $border-fade;
+		border-bottom: $border-fade;
+	}
+	// Clear floats after columns
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+	// Logo
+	.site-icon {
+		width: 100%;
+	}
+
+	// Title
+	.site-title {
+		display: block;
+		margin: 0 1rem;
+		background-color: #000;
+		box-shadow: 0 0 0.5rem 0.1rem #000;
+		font-family: $serif-font-family;
+		font-size: 1.8rem;
+		padding: 0.5rem 1rem;
+		text-shadow: 	0 0 0.25rem #fafafa, 
+								0 0 0.5rem #b8860b, 
+								0 0 0.55rem #b8860b;
+		a, a:hover, a:active {
+			padding: 0.5rem 1rem;
+			color: #fafafa;
+		}
+	}
+	
+	// Menu
+	.menu-content {
+		margin-top: 1rem;
+		margin-bottom: 0.5rem;
+		list-style: none;
+		display: inline-block;		
+		li {
+			float: left;
+			padding: 0 0.5rem;
+			border-top: $border-fade;
+			border-bottom: $border-fade;
+			&:not(:last-child) {
+				border-right: $border-layout;
+			}
+			a {
+				color: #555;
+				&:hover, &:focus {
+					color: #777;
+					border-bottom: thin dotted #777;
+				}
+			}
+		}
+	}
+}
+
+.site-footer {
+	max-height: 2rem;
+	background-color: #fafafa;
+	font-size: .8rem;
+	line-height: 120%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	padding: 0.15rem;
+	text-align: center;
+	width: 100%;
+	.copyright {
+		display: inline-block;
+	}
+	.to-top-link {
+		position: fixed;
+		right: 0;
+		margin-right: 0.5rem;
+	}
+}

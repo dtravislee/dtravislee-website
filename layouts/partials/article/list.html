@@ -1,0 +1,14 @@
+{{ range .Paginator.Pages }}
+	{{ if not .Params.doNotList }}
+		<article class="listed-page" role="article" itemscope itemtype="http://schema.org/CreativeWork">
+			<h2 class="page-title"><a href="{{ .Permalink }}" itemprop="name url">{{ .Title }}</a></h2>
+			{{ partial "article/meta" . }}
+			<div class="summary" itemprop="abstract">
+				{{ .Summary }}
+				{{ if .Truncated }}
+					<a class="read-more-link" href="{{ .RelPermalink }}" itemprop="url">Read More…</a>
+				{{ end }}
+			</div>
+		</article>
+	{{ end }}
+{{ end }}

@@ -1,12 +1,15 @@
-{{ define "main" }}
-    
-    {{ range .Paginator.Pages }}
-        <article>
-            <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-            {{ .Content }}
-        </article>
-    {{ end }}
+{{/* Overrides blocks in baseof.html with data for list pages */}}
 
-    {{ template "_internal/pagination.html" . }}
+{{ define "main" }}
+
+	<header>
+		{{ partial "article/title.html" . }}
+	</header>
+	
+	{{ .Content }}
+    
+	{{ partial "article/list.html" . }}
+	
+	{{ template "_internal/pagination.html" . }}
 
 {{ end }}

@@ -1,8 +1,13 @@
+{{/* Overrides blocks in baseof.html with data for single posts */}}
+
 {{ define "main" }}
-
-    <article>
-        <h1>{{ .Title }}</h1>
-        {{ .Content }}
-    </article>
-
+	<article class="page" role="article" itemscope itemtype="http://schema.org/CreativeWork">
+		<header>
+			{{ partial "article/title.html" . }}
+			{{ partial "article/meta.html" . }}
+		</header>
+		{{ .Content }}
+		{{ partial "article/related.html" . }} 
+		{{ partial "article/navigation.html" . }} 
+	</article>
 {{ end }}

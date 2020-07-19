@@ -1,33 +1,84 @@
+## Base Info
 baseURL = "/"
-languageCode = "en-gb"
-title = "{TITLE}"
+languageCode = "en-us"
+title = "D. Travis Lee"
+description = "Library of a speculative fiction writer"
+keywords = ""
+publishDir = "/website/"
 
+## Robots
 enableRobotsTXT = true
-disableAliases = true
 
+## Site Parameters
 [params]
-disallow_search_engines = false # set robots.txt to disallow everything
 
-# add redirects/headers
-[outputs]
-home = ["HTML", "RSS", "REDIRECTS", "HEADERS"]
-
-# remove .{ext} from text/netlify
-[mediaTypes."text/netlify"]
-suffixes = [""]
-delimiter = ""
-
-# add output format for netlify _redirects
-[outputFormats.REDIRECTS]
-mediatype = "text/netlify"
-baseName = "_redirects"
-isPlainText = true
-notAlternative = true
-
-# add output format for netlify _headers
-[outputFormats.HEADERS]
-mediatype = "text/netlify"
-baseName = "_headers"
-isPlainText = true
-notAlternative = true
-
+	## Images
+	authorImage = "/site/sitelogo.png"
+	favicon = "/site/dtlee-favicon.png"
+	appleIcon = "/site/dtlee-apple-touch"
+	
+	## Visual Settings
+	dateFormat = "Jan 2, 2006"
+	startThemeColor = "night"  # starting theme colour - 'night' (for darkmode) or 'day'
+	
+	## Copyright
+	copyright = "D. Travis Lee"
+	license = "All Rights Reserved"
+	
+	## Search Engines
+	disallow_search_engines = false # set to "true" to block all engines
+	
+	## Metadata Toggles
+	useSchema = true
+	useOpengraph = true
+	useTwittercards = true
+	
+## Goldmark Markup Settings
+[markup]
+	## Code Syntax Highlighting - https://gohugo.io/content-management/syntax-highlighting/
+	[markup.highlight]
+		codeFences = true
+		style = "solarized-dark256"
+	## Table of Contents Settings
+	[markup.tableOfContents]
+		ordered = false
+		startLevel = 2
+		endLevel = 6
+	
+## Taxonomies
+[taxonomies]
+	label = "labels"
+	
+## Permalinks
+[permalinks]
+	articles = "/:filename/" # Flattens directory structure
+	
+## Menu
+[menu]
+	[[menu.main]]
+		identifier = "index"
+		name = "Home"
+		url = "/"
+		weight = 1
+	[[menu.main]]
+		identifier = "tags"
+		name = "Labels"
+		url = "/labels/"
+		weight = 2
+	[[menu.main]]
+		identifier = "archive"
+		name = "Archive"
+		url = "https://github.com/dtravislee/dtravislee-website-archive"
+		weight = 3
+	[[menu.main]]
+		identifier = "daynight"
+		name = "Lighting"
+		pre = "<label id='DnSwitch' for='DayNightToggle'>"
+		post = "</label>"
+		url = ""
+		weight = 4
+	[[menu.main]]
+		identifier = "info"
+		name = "About"
+		url = "/about/"
+		weight = 5

@@ -1,7 +1,23 @@
 <footer class="site-footer" role="contentinfo">
 
-    <p class="site-footer__copyright">
-        &copy; {{ now.Format "2006" }} &middot; <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-    </p>
+    {{ with .Site.Params.copyright }}
+		<p class="copyright">
+			&copy; {{ now.Format "2006"}} {{ . }}
+			{{ with $.Site.Params.license }}
+				- 
+				{{ if $.Site.Params.licenseURL }}
+					<a href="{{ .Site.Params.licenseURL | safeHTML }}">{{ . }}</a>
+				{{ else }}
+					{{ . }}
+				{{ end }}
+			{{ end }}
+		</p>
+	{{ end }}
+	
+	{{ if .Site.GoogleAnalytics }}
+		{{ template "_internal/google_analytics_async.html" . }}
+	{{ end }}
+	
+	<span class="to-top-link">[<a href="#">Top of Page</a>]</span>
 
 </footer>

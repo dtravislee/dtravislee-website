@@ -1,5 +1,28 @@
 <header class="site-header" role="banner">
 
-    <strong><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></strong>
-    
+	<a class="skip" href="#MainContent" onclick="getElementById('MainContent').focus()">Skip to Main Content</a>
+	
+	<div class="header-left">
+		<img class="site-icon" src="/site/sitelogo.png" alt="Site Icon" aria-hidden="true"/>
+	</div>
+	
+	<div class="header-right">
+		<span class="site-title">
+			<a href="{{ .Site.BaseURL }}" itemprop="author name">{{ .Site.Title }}</a>
+		</span>
+		
+		<ul class="menu-content" role="navigation">
+			{{ range .Site.Menus.main }}
+				<li id="{{ .Identifier }}">
+					{{ .Pre }}
+					<a {{ with .URL }} href="{{ . }}" {{ end }}>
+						<!--<img class="menu-icon" src="/menu/{{ .Identifier }}.png" alt="{{ .Identifier }}" aria-hidden="true"/>-->
+						<span class="menu-text">{{ .Name }}</span>
+					</a>
+					{{ .Post }}
+				</li>
+			{{ end }}
+		</ul>
+	</div>
+	
 </header>

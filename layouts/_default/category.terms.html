@@ -1,0 +1,25 @@
+{{/* Overrides blocks in baseof.html with data for a list of taxonomy terms */}}
+
+{{ define "main" }}
+	
+	<header>
+		{{ partial "article/title.html" . }}
+	</header>
+	
+	<ul role="directory" itemscope itemtype="http://schema.org/DefinedTermSet">
+		{{ range .Paginator.Pages }}
+		<li class="list-item" role="listitem" itemscope itemtype="http://schema.org/DefinedTerm">
+			<a href="{{ .RelPermalink }}">{{ .Title }}</a>
+			<span class="post-count">
+				{{ with .Pages }}
+					{{ len . }}
+					Post{{ if gt (len .) 1}}s{{ end }}
+				{{ end }}
+			</span>
+		</li>
+		{{ end }}
+	</ul>
+	
+	{{ template "_internal/pagination.html" . }}
+
+{{ end }}

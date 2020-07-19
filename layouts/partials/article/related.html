@@ -1,0 +1,7 @@
+{{ $related := .Site.RegularPages.Related . | first 5 }}
+{{ with $related }}
+	<aside class="related-articles" role="complementary">
+		<h2>Related Articles</h2>
+		{{ partial "article/list.html" . }}
+	</aside>
+{{ end }}

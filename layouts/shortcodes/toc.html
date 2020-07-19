@@ -1,0 +1,11 @@
+{{/* USE: {{< toc >}} - will auto-scan the document for header tags and populate itself*/}}
+
+<div class="toc" role="navigation">
+	<a class="skip" role="link" href="#AfterToc" onclick="getElementById('AfterToc').focus()">Skip Table of Contents</a>
+	<input type="checkbox" id="TocToggle" aria-hidden="true" hidden>
+	<label for="TocToggle" class="toc-title" aria-hidden="true" role="button">
+		Table of Contents (<span class="clickable"></span>)
+	</label>
+	{{ .Page.TableOfContents }}
+</div>
+<span id="AfterToc" aria-hidden="true"></span>

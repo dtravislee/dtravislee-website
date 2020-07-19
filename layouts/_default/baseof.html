@@ -1,33 +1,38 @@
+{{/* Universal backing for other layout files */}}
+
 <!doctype html>
-<html lang="{{ .Site.LanguageCode | default "en" }}">
+<html lang="{{ .Site.LanguageCode | default `en` }}">
     <head>
-
-        {{ block "site/meta" . }}{{ partial "site/meta.html" . }}{{ end }}
-
-        <title>{{ block "title" . }}
-            {{- with .Title }}{{ . }} | {{ end }}{{ .Site.Title -}}
-        {{ end }}</title>
-
-        {{ range .AlternativeOutputFormats }}
-            <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
-        {{ end }}
-
-        {{ block "site/styles" . }}{{ partial "site/styles.html" . }}{{ end }}
-
+	
+		 <title>
+			{{ block "title" . }}
+				{{- with .Title }}{{ . }} - {{ end }}{{ .Site.Title -}}
+			{{ end }}
+		</title>
+		
+        {{ block "meta" . }} {{ partial "site/meta.html" . }} {{ end }}
+        {{ block "styles" . }} {{ partial "site/styles.html" . }} {{ end }}
+		{{ block "scripts" . }} {{ partial "site/scripts.html" . }} {{ end }}
+		{{ block "links" . }} {{ partial "site/links.html" . }} {{ end }}
+		
     </head>
     <body>
+	
+		{{/* If checked, website is in day mode */}}
+		<input type="checkbox" id="DayNightToggle" aria-hidden="true" onclick="dayNightSwitch()" {{ if eq ( .Site.Params.startThemeColor | default "night") "day" }} checked {{ end }} hidden>
+		
+		<div class="body-content" itemscope itemtype="https://schema.org/WebSite">
+			<div class="background" aria-hidden="true"></div>
+			
+			{{ block "header" . }} {{ partial "site/header.html" . }} {{ end }}
 
-        {{ block "header" . }}{{ partial "site/header.html" . }}{{ end }}
-
-        <main class="site-main" role="main">
-
-            {{ block "main" . }}{{ end }}
-
-        </main>
-
-        {{ block "footer" . }}{{ partial "site/footer.html" . }}{{ end }}
-
-        {{ block "site/scripts" . }}{{ partial "site/scripts.html" . }}{{ end }}
+			<main class="site-main" id="MainContent" role="main" itemscope itemtype="http://schema.org/Collection">
+				{{ block "main" . }} {{ .Content }} {{ end }}
+			</main>
+			
+			{{ block "footer" . }} {{ partial "site/footer.html" . }} {{ end }}
+			
+		</div>
 
     </body>
 </html>

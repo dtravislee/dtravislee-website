@@ -1,0 +1,55 @@
+/* Collates rules in /styles, in order */
+/* Note: Hugo uses LibSass, so some at-rules may not exist */
+
+@import "styles/reset";
+@import "styles/variables";
+@import "styles/site";
+@import "styles/post";
+
+// For Taxonomy styles
+/*
+.badge {
+	display: inline-block;
+	font-style: italic;
+	line-height: 1;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+}
+*/
+
+
+
+// Vertically align images when in a wrapper, see: https://www.w3.org/Style/Examples/007/center.en.html
+// May not be used (but probably will be in case inline images are wide and narrow - won't hurt!)
+/*
+.image-wrapper {
+	display: table-cell;
+	vertical-align: middle;
+	img {
+		margin: 0 auto;
+	}
+}
+*/
+
+// mobile ~320..480px
+// 320px ~ 16rem/16px ~ 18.8235/17px ~ 17.7778/18px
+// 480px ~ 30rem/16px ~ 28.2353rem/17px ~ 26.6667rem/18px
+@media (min-width: 1px) and (max-width: 767px) {
+}
+
+// tablet/medium device ~768px+
+// 768px ~ 48em/16px ~ 45.1765em/17px ~ 42.6667/18px
+@media (min-width: 768px) {
+}
+
+// Large devices (laptops/desktops, 992px and up)
+// ~ 62rem/16px ~ 58.3529rem/17px ~ 55.1111rem/18px
+@media (min-width: 992px) {
+}
+
+// Large device ~1024px
+// 1024px ~  64rem/16px ~ 60.2353rem/17px 56.8889rem/18px
+@media (min-width: 1024px) {
+	// styles
+}

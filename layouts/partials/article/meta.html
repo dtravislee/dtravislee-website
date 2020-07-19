@@ -1,0 +1,26 @@
+<div class="page-meta" role="contentinfo">
+	<time>
+		{{ if not .Date.IsZero }}
+			{{ .Date.Format (.Site.Params.dateformat | default `Jan 02 2006`) }}
+		{{ else }}
+			{{ now.Format (.Site.Params.dateformat | default `Jan 02 2006`) }}
+		{{ end }}
+	</time>
+	{{ if ne .Date .Lastmod }}
+		(<span class="updated-container">Updated <time>{{ .Lastmod.Format (.Site.Params.dateformat | default `Jan 02 2006`) }}</time></span>)
+	{{ end }} 
+	{{ with .Params.categories }}
+		in 
+		{{ $total := len . }}
+			{{ if gt $total 0 }}
+				{{ $total := sub $total 1 }} 
+				  {{ range $i, $gen := sort . }}
+					  <a class="category-label" href="{{ `/categories/` | relURL }}{{ $gen | urlize }}">
+						{{ $gen | lower }}
+					</a>
+					{{ if lt $i $total }}, {{ end }}
+				  {{ end }}
+			{{ end }}
+	{{ end }}
+	- {{ .ReadingTime }} min read ({{ .WordCount }} words)
+</div>

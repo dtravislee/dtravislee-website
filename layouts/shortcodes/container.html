@@ -1,0 +1,9 @@
+{{/* USE: {{< container class="optional classes list" id="optional id" >}} Markdown text {{</ container >}} */}}
+{{/* Adds a container with specified ID / class(es) around the content */}}
+
+{{/* Implemented Classes: */}}
+{{/* Implemented IDs: */}}
+
+<span {{ with .Get "id" }} id="{{ . }}" {{ end }} {{ with .Get "class" }} class="{{ . }}" {{ end }} >
+	{{ .Inner | markdownify }}
+</span>

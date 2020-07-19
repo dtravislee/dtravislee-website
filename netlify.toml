@@ -1,13 +1,13 @@
 [build]
-    command = "npm run build"
-    publish = "public"
-
-[build.environment]
-    HUGO_VERSION = "0.58.3"
-
+	publish = "public"
+	command = "hugo --gc --minify"
+	
 [context.production.environment]
-    HUGO_ENV = "production"
-    NODE_ENV = "production"
+	HUGO_ENV = "production"
+	HUGO_VERSION = "0.58.3"
 
 [context.deploy-preview]
-    command = "npm run build-preview"
+	command = "hugo --gc --minify --buildFuture --buildDrafts -b $DEPLOY_PRIME_URL"
+
+[context.deploy-preview.environment]
+	HUGO_VERSION = "0.58.3"

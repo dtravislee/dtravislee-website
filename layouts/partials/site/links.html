@@ -1,0 +1,5 @@
+ {{ range .AlternativeOutputFormats }}
+	<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+{{ end }}
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/site/dtlee-apple-touch.png">
+<link rel="shortcut icon" href="/site/dtlee-favicon.png">
