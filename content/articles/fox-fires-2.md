@@ -1,7 +1,7 @@
 +++
 date = 2020-02-15
 title = "Fox Fires - Part 2"
-labels = ["Stories","Fox Fires","Fantasy"]
+tags = ["Stories","Fox Fires","Fantasy"]
 summary = "The frozen world bears warm promises"
 draft = false
 +++

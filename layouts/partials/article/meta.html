@@ -9,18 +9,15 @@
 	{{ if ne .Date .Lastmod }}
 		(<span class="updated-container">Updated <time>{{ .Lastmod.Format (.Site.Params.dateformat | default `Jan 02 2006`) }}</time></span>)
 	{{ end }} 
-	{{ with .Params.categories }}
+	{{ with .Params.tags }}
 		in 
 		{{ $total := len . }}
-			{{ if gt $total 0 }}
-				{{ $total := sub $total 1 }} 
-				  {{ range $i, $gen := sort . }}
-					  <a class="category-label" href="{{ `/categories/` | relURL }}{{ $gen | urlize }}">
-						{{ $gen | lower }}
-					</a>
-					{{ if lt $i $total }}, {{ end }}
-				  {{ end }}
+		{{ if gt $total 0 }}
+			{{ $total := sub $total 1 }} 
+			{{ range $i, $gen := sort . }}
+				<a class="tag-label" href="{{ `/tags/` | relURL }}{{ $gen | urlize }}">{{ $gen }}</a>{{ if lt $i $total }}, {{ end }}
 			{{ end }}
+		{{ end }}
 	{{ end }}
 	- {{ .ReadingTime }} min read ({{ .WordCount }} words)
 </div>

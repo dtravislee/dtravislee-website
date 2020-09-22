@@ -2,10 +2,12 @@
 
 {{ define "main" }}
 	<article class="page" role="article" itemscope itemtype="http://schema.org/CreativeWork">
-		<header>
-			{{ partial "article/title.html" . }}
-			{{ partial "article/meta.html" . }}
-		</header>
+		<aside class="sidebar-info">
+			<header>
+				{{ partial "article/title.html" . }}
+				{{ partial "article/meta.html" . }}
+			</header>
+		</aside>
 		{{ .Content }}
 		{{ partial "article/related.html" . }} 
 		{{ partial "article/navigation.html" . }} 

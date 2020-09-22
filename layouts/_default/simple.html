@@ -1,8 +1,8 @@
 {{/* Overrides blocks in baseof.html with data for about and 404 pages */}}
-{{/* Similar to 'single', but lacks metadata, related posts, and navigation */}}
+{{/* Similar to 'single', but lacks sidebar, metadata, related posts, or navigation */}}
 
 {{ define "main" }}
-	<article class="page" role="article" itemscope itemtype="http://schema.org/CreativeWork">
+	<article class="page no-sidebar" role="article" itemscope itemtype="http://schema.org/CreativeWork">
 		<header>
 			{{ partial "article/title.html" . }}
 		<header>

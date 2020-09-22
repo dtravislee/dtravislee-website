@@ -2,8 +2,6 @@
 baseURL = "/"
 languageCode = "en-us"
 title = "D. Travis Lee"
-description = "Library of a speculative fiction writer"
-keywords = ""
 publishDir = "/website/"
 
 ## Robots
@@ -12,6 +10,9 @@ enableRobotsTXT = true
 ## Site Parameters
 [params]
 
+	## Base Info
+	description = "Library of a speculative fiction writer"
+
 	## Images
 	authorImage = "/site/sitelogo.png"
 	favicon = "/site/dtlee-favicon.png"
@@ -19,14 +20,14 @@ enableRobotsTXT = true
 	
 	## Visual Settings
 	dateFormat = "Jan 2, 2006"
-	startThemeColor = "night"  # starting theme colour - 'night' (for darkmode) or 'day'
+	lightState = "on"  # starting theme colour - "on" for light colours, "off" for dark
 	
 	## Copyright
 	copyright = "D. Travis Lee"
 	license = "All Rights Reserved"
 	
 	## Search Engines
-	disallow_search_engines = false # set to "true" to block all engines
+	disallowSearchEngines = false # set to "true" to block all engines
 	
 	## Metadata Toggles
 	useSchema = true
@@ -44,10 +45,13 @@ enableRobotsTXT = true
 		ordered = false
 		startLevel = 2
 		endLevel = 6
+	[markup.goldmark]
+		[markup.goldmark.renderer]
+			unsafe = true
 	
 ## Taxonomies
 [taxonomies]
-	label = "labels"
+	tag = "tags"
 	
 ## Permalinks
 [permalinks]
@@ -56,14 +60,14 @@ enableRobotsTXT = true
 ## Menu
 [menu]
 	[[menu.main]]
-		identifier = "index"
+		identifier = "home"
 		name = "Home"
 		url = "/"
 		weight = 1
 	[[menu.main]]
 		identifier = "tags"
-		name = "Labels"
-		url = "/labels/"
+		name = "Tags"
+		url = "/tags/"
 		weight = 2
 	[[menu.main]]
 		identifier = "archive"
@@ -71,14 +75,14 @@ enableRobotsTXT = true
 		url = "https://github.com/dtravislee/dtravislee-website-archive"
 		weight = 3
 	[[menu.main]]
-		identifier = "daynight"
+		identifier = "lighting"
 		name = "Lighting"
-		pre = "<label id='DnSwitch' for='DayNightToggle'>"
+		pre = "<label id='Lightswitch' for='LightswitchToggle'>"
 		post = "</label>"
 		url = ""
 		weight = 4
 	[[menu.main]]
-		identifier = "info"
+		identifier = "about"
 		name = "About"
 		url = "/about/"
 		weight = 5

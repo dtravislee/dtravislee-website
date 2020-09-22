@@ -1,9 +1,9 @@
-{{ $daynight := resources.Get "js/daynight-mode.js" | minify }}
+{{ $lightswitch := resources.Get "js/lightswitch.js" | minify }}
 {{ $smooth := resources.Get "js/smooth-expansion.js" | minify }}
 {{ $html5shiv := resources.Get "js/html5shiv.js" | minify }}
 {{ $resp := resources.Get "js/respond.js" | minify }}
 
-<script src="{{ $daynight.Permalink }}"></script>
+<script src="{{ $lightswitch.Permalink }}"></script>
 <script src="{{ $smooth.Permalink }}"></script>
 
 {{ `<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

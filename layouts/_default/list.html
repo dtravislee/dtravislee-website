@@ -2,13 +2,15 @@
 
 {{ define "main" }}
 
-	<header>
-		{{ partial "article/title.html" . }}
-	</header>
-	
-	{{ .Content }}
+	<aside class="sidebar-info">
+		<header>
+			{{ partial "article/title.html" . }}
+		</header>
+		
+		{{ .Content }}
+	</aside>
     
-	{{ partial "article/list.html" . }}
+	{{ partial "article/paginated-list.html" . }}
 	
 	{{ template "_internal/pagination.html" . }}
 

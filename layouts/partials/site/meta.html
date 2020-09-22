@@ -1,8 +1,20 @@
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Theme Color for Chrome, Firefox OS and Opera -->
+<meta name="theme-color" content="#b8860b">
+
+<!-- Short description of the document (limit to 150 characters) -->
+<!-- This content *may* be used as a part of search engine results. -->
 {{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
-{{ with .Site.Params.keywords }}<meta name="keywords" content="{{ . }}">{{ end }}
+
+<!-- Control the behavior of search engine crawling and indexing -->
+{{ if not .Site.Params.disallowSearchEngines }}
+	<meta name="robots" content="index,follow"><!-- All Search Engines -->
+	<meta name="googlebot" content="index,follow"><!-- Google Specific -->
+{{ end }}
+
 {{ if .Site.Params.useSchema }} {{ template "_internal/schema.html" . }} {{ end }}
 {{ if .Site.Params.useOpenGraph }} {{ template "_internal/opengraph.html" . }} {{ end }}
 {{ if .Site.Params.useTwitterCards }} {{ template "_internal/twitter_cards.html" . }} {{ end }}

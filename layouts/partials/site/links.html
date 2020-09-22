@@ -1,5 +1,12 @@
  {{ range .AlternativeOutputFormats }}
 	<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 {{ end }}
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/site/dtlee-apple-touch.png">
-<link rel="shortcut icon" href="/site/dtlee-favicon.png">
+{{ with .Site.Params.appleIcon }}<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ . }}">{{ end }}
+
+{{ with .Site.Params.favicon }}<link rel="icon" href="{{ . }}">{{ end }}
+
+<!-- Links to information about the author(s) of the document -->
+<link rel="author" href="about/index.html">
+
+<!-- Provides information about an author or another person -->
+<link rel="me" href="mailto:dtravislee@gmail.com">

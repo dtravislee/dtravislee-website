@@ -2,6 +2,8 @@
 {{ with $related }}
 	<aside class="related-articles" role="complementary">
 		<h2>Related Articles</h2>
-		{{ partial "article/list.html" . }}
+			{{ range . }}
+				{{ partial "article/list.html" . }}
+			{{ end }}
 	</aside>
 {{ end }}

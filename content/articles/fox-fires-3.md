@@ -1,7 +1,7 @@
 +++
 date = 2020-02-16
 title = "Fox Fires - Part 3"
-labels = ["Stories","Fox Fires","Fantasy"]
+tags = ["Stories","Fox Fires","Fantasy"]
 summary = "Tamilla and Antias discover the gateway to the other side."
 draft = false
 +++

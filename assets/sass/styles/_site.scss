@@ -2,35 +2,6 @@
 * Styles for main site layout
 */
 
-/* ****************** */
-/* BASE STYLES */
-/* ****************** */
-
-html {
-	//https://www.client9.com/css-system-font-stack-sans-serif-v3
-	font-family: $sans-font-family;	
-	font-size: 20px;
-	line-height: 1.667em;
-	color: #333;
-}
-
-.background {
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	background-color: #fafafa;
-	z-index: -42;
-}
-
-// For details on ideal characters per line: https://en.wikipedia.org/wiki/Line_length
-.body-content {
-	max-width: 33rem; // 0.5rem per 1 character ~= 66 characters per line
-	padding: 0 1.5rem; // -6 characters per line ~= 60 characters per line
-	margin: 0 auto 2rem auto; // centers content
-}
-
 /* ************** */
 /* BASE STYLES */
 /* ************** */
@@ -54,10 +25,10 @@ html {
 }
 
 // For details on ideal characters per line: https://en.wikipedia.org/wiki/Line_length
-.body-content {
+main {
 	max-width: 33rem; // 0.5rem per 1 character ~= 66 characters per line
 	padding: 0 1.5rem; // -6 characters per line ~= 60 characters per line
-	margin: 0 auto 2rem auto; // centers content
+	margin: 4rem auto 2rem auto; // centers content and lowers it below header
 }
 
 code {
@@ -66,7 +37,7 @@ code {
 }
 
 // If #DayNightToggle is checked, website is in day reading mode (with light colours and dark text)
-#DayNightToggle:checked ~ .body-content {
+#DayNightToggle:checked ~ main {
 	color: #333;
 	background-color: #fafafa;
 }
@@ -105,61 +76,54 @@ a.skip {
 /* **************************** */
 
 .site-header {
-	@extend %underline;
-	margin-top: 0.5rem;
-	margin-bottom: 0.5rem;
-	// Layout - See https://www.w3schools.com/howto/howto_css_two_columns.asp
-	.header-left, header-right {
-		float: left;
-		height: 6.5rem;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	
+	.header-left, .header-right {
+		background-color: #fafafa;
 	}
+	
 	.header-left {
-		width: 20%;
+		float: left;
 	}
+	
 	.header-right {
-		width: 80%;
-		margin-left: auto;
-		text-align: center;
-		border-left: $border-layout;
-		border-top: $border-fade;
-		border-bottom: $border-fade;
-	}
-	// Clear floats after columns
-	&:after {
-		content: "";
-		display: table;
-		clear: both;
+		@extend %underline;
+		padding: 0.75rem 0;
+		display: block;
+		overflow: hidden;
+		margin-right: 1rem;
 	}
 
 	// Logo
 	.site-icon {
-		width: 100%;
+		width: 6.5rem;
 	}
 
 	// Title
 	.site-title {
-		display: block;
+		float: left;
 		margin: 0 1rem;
 		background-color: #000;
 		box-shadow: 0 0 0.5rem 0.1rem #000;
 		font-family: $serif-font-family;
 		font-size: 1.8rem;
-		padding: 0.5rem 1rem;
+		padding: 0.25rem 0.75rem;
 		text-shadow: 	0 0 0.25rem #fafafa, 
 								0 0 0.5rem #b8860b, 
 								0 0 0.55rem #b8860b;
 		a, a:hover, a:active {
-			padding: 0.5rem 1rem;
+			padding: 0 1rem;
 			color: #fafafa;
 		}
 	}
 	
 	// Menu
 	.menu-content {
-		margin-top: 1rem;
-		margin-bottom: 0.5rem;
 		list-style: none;
-		display: inline-block;		
+		line-height: 1.3;
 		li {
 			float: left;
 			padding: 0 0.5rem;
@@ -198,4 +162,13 @@ a.skip {
 		right: 0;
 		margin-right: 0.5rem;
 	}
+}
+
+/* ************ */
+/* SIDEBAR */
+/* *********** */
+.sidebar-info {
+	position: absolute;
+	left: 1rem; // For padding
+	top: 5rem; // 6.5rem (from top-bar) - 1.5rem (h1 margin top)
 }

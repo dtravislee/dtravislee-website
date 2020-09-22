@@ -2,11 +2,11 @@
 
 	<a class="skip" href="#MainContent" onclick="getElementById('MainContent').focus()">Skip to Main Content</a>
 	
-	<div class="header-left">
+	<span class="header-left">
 		<img class="site-icon" src="/site/sitelogo.png" alt="Site Icon" aria-hidden="true"/>
-	</div>
+	</span>
 	
-	<div class="header-right">
+	<span class="header-right">
 		<span class="site-title">
 			<a href="{{ .Site.BaseURL }}" itemprop="author name">{{ .Site.Title }}</a>
 		</span>
@@ -23,6 +23,6 @@
 				</li>
 			{{ end }}
 		</ul>
-	</div>
+	</span>
 	
 </header>

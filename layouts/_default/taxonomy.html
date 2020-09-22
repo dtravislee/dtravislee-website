@@ -1,0 +1,18 @@
+{{/* Overrides blocks in baseof.html with data for a tag page */}}
+{{/* Similar to 'list', with flavour text added */}}
+
+{{ define "main" }}
+
+	<header>
+		{{ partial "article/title.html" . }}
+	</header>
+	
+	<p>Showing articles tagged <i>{{ .Title }}</i>.</p>
+	
+	<p>To view all tags, <a href="/tags/">click here</a>.</p>
+    
+	{{ partial "article/paginated-list.html" . }}
+	
+	{{ template "_internal/pagination.html" . }}
+
+{{ end }}

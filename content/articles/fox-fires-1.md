@@ -1,7 +1,7 @@
 +++
 date = 2020-02-13
 title = "Fox Fires - Part 1"
-labels = ["Stories","Fox Fires","Fantasy"]
+tags = ["Stories","Fox Fires","Fantasy"]
 summary = "Two adventurers, Tamilla and Antias, begin their trek through a snowy landscape in search of treasures unknown."
 draft = false
 +++
