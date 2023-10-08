@@ -1,0 +1,15 @@
+/* CSS rules for pagination on list pages */
+
+/* Page Selector */
+.pagination { margin-top: 1rem; } /* Pagination container */
+.pagination form { display: inline; } /* Pagination form */
+.pagination #pagenum { text-align: center; 	margin: 0 0.5rem; } /* Number input */
+.pagination button { font-family: inherit; } /* Submit button */
+
+/* Pagination Links */
+.pagilinks { margin-top: 0.5rem; } /* Spacing between pagination links and page selector */
+.pagilinks a, .pagination .pagibar { margin-right: 0.25rem; }
+.pagilinks .first:before { content: '<< ' }
+.pagilinks .previous:before { content: '< ';}
+.pagilinks .next:after { content: ' >'; }
+.pagilinks .last:after { content: ' >>'}

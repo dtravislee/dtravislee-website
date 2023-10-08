@@ -1,0 +1,12 @@
+/* CSS rules for definition lists */
+
+main dl { margin: 1rem 0; }
+main dl dt {
+	margin: 1rem 0 0 0;
+	font-weight: bold;
+}
+main dl dd {
+	border-left: thin solid #aaa;
+	margin: 0 0 1rem 0;
+	padding: 1rem;
+}

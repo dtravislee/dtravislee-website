@@ -1,0 +1,33 @@
+/* CSS rules for inline code and code blocks */
+
+code { 
+	font-size: 0.85rem;
+	font-family: "SFMono-Regular", 
+		"SF-Mono", 
+		Menlo, 
+		Monaco, 
+		Consolas, 
+		"Liberation Mono", 
+		"Roboto Mono", 
+		"Ubuntu Mono", 
+		"Courier New", 
+		Courier, 
+		monospace;
+}
+pre code { 
+	overflow: auto;
+	text-indent: -1.5rem; 
+	padding: 0 1rem 0 2rem;
+	border: thin solid #aaa;
+	display: block;
+}
+pre code:before {
+	display: block;
+	content: "> Code_";
+	margin-bottom: 0.5rem; 
+}
+pre code:after {	
+	display: block;
+	content: "> End_";
+	margin-top: 0.5rem; 
+}

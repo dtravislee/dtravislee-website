@@ -1,0 +1,9 @@
+/* CSS rules for preformatted text */
+
+pre {
+	margin: 1rem 0;
+	overflow: hidden;
+	display: block;
+	white-space: pre;
+	tab-size: 4;
+}

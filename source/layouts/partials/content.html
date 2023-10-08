@@ -1,0 +1,31 @@
+{{/* CONTENT FILTERING */}}
+{{/* Applies some post-markdown, pre-render adjustments to content files */}}
+
+{{- $content := .Content -}}
+
+{{/* Add 'bookmark' links to each heading */}}
+{{- $contentHeading := `(<h[2-9] id=(?:\"|')([^\"|']+)(?:\"|').*>)(.*)(</h[2-9]+>)` -}}
+{{- $contentHeadingWithLink := `${1}<a href='#${2}'>${3}</a>${4}` -}}
+
+{{/* Pull footnote href and rebuild with more generic / ascii "return" */}}
+{{- $footnoteReturn := `(?:<a href=(?:\"|')(.*)(?:\'|")(?:.*) class=(?:\"|')footnote-backref(?:'|\") (?:.*)>)(?:.*)(?:</a>)` -}}
+{{- $newFootnoteReturn := `<sup><a href='${1}' role='doc-backlink' aria-label='return'>^</a></sup>` -}}
+
+{{/* Remove footnote-ref classes */}}
+{{- $oldFootnote := `(class=(?:\"|')footnote-ref(?:'|\"))` -}}
+{{- $newFootnote := `` -}}
+
+{{/* Remove hr element with heading for footnotes */}}
+{{- $footnotesHr := `(<(?:section|div) class=(?:\"|')footnotes(?:'|\") role=(?:\"|')doc-endnotes(?:'|\")>\s+)(?:<hr>)` -}}
+{{- $footnotesNoHr := `${1}<h2 id='references'>References</h2>` -}}
+
+{{- $toc :=`(<nav id=(?:\"|')TableOfContents(?:'|\"))` -}}
+{{- $tocNew := `<nav aria-label='Page navigation'` -}}
+
+{{- .Content
+	| replaceRE $footnotesHr $footnotesNoHr
+	| replaceRE $footnoteReturn $newFootnoteReturn 
+	| replaceRE $contentHeading $contentHeadingWithLink 
+	| replaceRE $toc $tocNew
+	| replaceRE $oldFootnote $newFootnote
+	| safeHTML -}}

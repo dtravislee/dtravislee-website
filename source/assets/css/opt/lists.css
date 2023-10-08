@@ -1,0 +1,10 @@
+/* CSS rules for lists */
+
+main ol, main ul, main dl, main li { margin: 1rem 0; }
+main ol, main ul { margin-left: 2rem; }
+main ol ul, main ul ul, main ul ol, main ol ol { margin-left: 1rem; }
+main ul { list-style: initial; }
+main li { 
+	padding-left: 0.5rem; 
+	display: list-item;
+}

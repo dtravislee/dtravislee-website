@@ -1,0 +1,79 @@
+{{/* Pagination is placed up front to be accessible to list.html and other blocks */}}
+{{- block `pagination` . -}}{{- end -}}
+
+<!doctype html>
+<html lang='{{- .Site.Params.lang | default `en` -}}' itemscope itemtype='https://schema.org/WebPage'>
+	<head>
+		<meta charset='utf-8'/>
+		<meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+		<meta name='robots' content='index,follow'>{{/* Controls all Search Engines */}}
+		<meta name='googlebot' content='index,follow'>{{/* Controls Google Specific Engines */}}
+		
+		<title>{{- partial `title` . -}}
+			{{- ` | ` -}}
+			{{- .Site.Params.title | title -}}</title>
+		<style>
+			{{/* Base styles */}}
+			{{- with resources.Get "css/base.css" -}}{{- .Content | safeCSS -}}{{- end -}}
+			{{/* Added styles */}}
+			{{- block `css` . -}}{{- end -}}
+		</style>
+		<style id='js-hide'>.js-only { display: none; }</style>
+		{{- with resources.Get `css/print.css` -}}
+			<style media='print'>{{- .Content | safeCSS -}}</style>
+		{{- end -}}
+		<!-- Why so little JavaScript?
+			https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/
+			https://endtimes.dev/why-your-website-should-work-without-javascript/ -->
+		<script>
+			{{- with resources.Get `js/jsshow.js` | minify -}}
+				{{- .Content | safeJS -}}
+			{{- end -}}
+		</script>
+		{{- block `js` . -}}{{- end -}}
+		{{- $html5shiv := resources.Get `js/html5shiv.js` | minify -}}
+		{{- $resp := resources.Get `js/respond.js` | minify -}}
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		{{- `<!--[if lt IE 9]> <script src='` | safeHTML -}}
+		{{- $html5shiv.Permalink -}}
+		{{- `'></script> <script src='` | safeHTML -}}
+		{{- $resp.Permalink -}}
+		{{- `'></script> <![endif]-->` | safeHTML -}}
+		{{/* Get description or summary, trimming excess leading and trailing whitespace. */}}
+		{{- $desc := (partial `description` .) | replaceRE `(?:$\s+|^\s+)` `` -}}
+		{{- $iso8601 := `2006-01-02T15:04:05-07:00` -}}
+		<meta name='twitter:title' property='og:title' itemprop='name' content='{{- .Title | default .Site.Params.title -}}'>
+		{{- if gt (len $desc) 0 -}}<meta name='twitter:description' property='og:description' itemprop='description' content='{{- $desc -}}'/>{{- end -}}
+		{{- if .Params.date -}}<meta property='article:published_time' itemprop='datePublished' content='{{- .Date.Format $iso8601 | safeHTMLAttr -}}'/>{{- end -}}
+		{{- if ne .Lastmod .Date -}}<meta property='article:published_time' itemprop='dateModified' content='{{- .Lastmod.Format $iso8601 | safeHTMLAttr -}}'/>{{- end -}}
+		{{- with .Permalink -}}<meta property='og:url' content='{{- . -}}' />{{- end -}}
+		{{- with .Site.Params.title -}}<meta property='og:site_name' content='{{- . -}}'/>{{- end -}}
+		{{- with .OutputFormats.Get "rss" -}}<link rel='{{- .Rel -}}' type='{{- .MediaType.Type -}}' href='{{- .Permalink -}}' title='{{- $.Site.Params.title -}}'/>{{- end -}}
+		<link rel="shortcut icon" type="image/x-icon" href='/favicon.ico'>
+	</head>
+	<body>
+		<header class='site-header' role='banner'>
+			<a class='sr-only' href='#main'>{{- `Skip to Contents` -}}</a>
+			<nav class='site-nav' aria-label="Site navigation"><ul class="menu">
+				{{- range where .Site.Menus.main "Params.disable" "!=" true -}}<li {{ with .Params.class -}}class='{{- . -}}'{{- end -}}><a href='{{- .URL -}}' >{{- .Identifier -}}</a></li>{{- end -}}
+			</ul></nav>
+		</header>
+		<main id='main' role='main'>
+			<article role='article'>
+				<header class='article-header'>
+					<h1>{{- partial `title` . -}}</h1>
+					{{- if .IsPage -}}<a class='sr-only' href='#content'>{{- `Skip Metadata` -}}</a>{{- end -}}
+					{{- partial `meta` . -}}
+				</header>
+				{{- block `content` . -}}{{- end -}}
+			</article>
+		</main>
+		<footer id='footer' class='site-footer' role='contentinfo'>
+			<p>{{- `&copy; ` | safeHTML -}} 
+				{{- if ne "2022" (now.Format "2006") -}}{{- `2022–` -}}{{- end -}}
+				{{- now.Format "2006" -}}{{- `&nbsp;` | safeHTML -}}{{- .Site.Params.author -}}{{- ` – ` -}}{{- .Site.Params.copyright -}}</p>
+			<p id='to-top'><a href='#'>{{- `Back to Top` -}}</a></p>
+		</footer>
+	</body>
+</html>

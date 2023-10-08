@@ -1,0 +1,159 @@
+{{/* HTML content for articles */}}
+
+{{/* --- */}}
+{{/* JAVASCRIPT */}}
+{{/* --- */}}
+
+{{- define `js` -}}
+	
+	{{/* DISQUS COMMENTS - See disqus.js for more */}}
+
+	{{/* Only use this script if footer is visible or if comments are forced on. */}}
+	{{/* (Comments are held in the footer, so no footer = no visible comments = no need for script.) */}}
+	{{/* We force comments on the contact page, where the rest of the footer is hidden. */}}
+	{{/* Requires DisqusShortname set in config.toml */}}
+	{{- if and
+		(.Site.DisqusShortname)
+		(or (.Params.forceComments) (not .Params.hideFooter)) -}}
+		{{- partial `jsgoloader` (dict `file` `js/disqus.js` `scope` . ) -}}
+	{{- end -}}
+{{- end -}}
+
+{{/* --- */}}
+{{/* CSS */}}
+{{/* --- */}}
+
+{{- define `css` -}}
+
+	{{/* MAIN CSS */}}
+	{{- .Scratch.Add `css` (slice
+		(resources.Get "css/single.css")
+		(resources.Get "css/opt/metadata.css")
+		)
+	-}}
+	
+	{{/* CONDITIONAL CSS */}}
+	
+	{{/* Article footer styles */}}
+	{{- if not .Params.hideFooter -}}
+		{{- .Scratch.Add `css` (slice (resources.Get "css/opt/article-footer.css")) -}}
+		{{- if .Params.date -}}
+			{{- .Scratch.Add `css` (slice (resources.Get "css/opt/next-previous.css")) -}}
+		{{- end -}}
+	{{- end -}}
+	
+	{{/* Comment styles */}}
+	{{- if and
+		(.Site.DisqusShortname)
+		(or (.Params.forceComments) (not .Params.hideFooter)) -}}
+		{{- .Scratch.Add `css` (slice (resources.Get "css/opt/comments.css")) -}}
+	{{- end -}}
+	
+	{{/* RETURN */}}
+	{{- range .Scratch.Get `css` -}}
+		{{- .Content | safeCSS -}}
+	{{- end -}}
+	
+{{- end -}}
+
+{{/* --- */}}
+{{/* CONTENT */}}
+{{/* --- */}}
+
+{{- define `content` -}}
+	<div id="content">
+		<style class='content-styles'>
+			{{/* Headings */}}
+			{{- range $seq := seq 2 6 -}}
+				{{- $query := print `<h` $seq -}}
+				{{- $src := print `css/opt/h` $seq `.css` -}}
+				{{- if findRE $query $.Content 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get $src)) -}}
+				{{- end -}}
+			{{- end -}}
+			
+			{{/* Other markdown styles */}}
+			{{- with .Content -}}
+				{{- if findRE `<figure` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/figures.css")) -}}
+				{{- end -}}
+				{{- if findRE `<li` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/lists.css")) -}}
+				{{- end -}}
+				{{- if findRE `<dl` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/def-lists.css")) -}}
+				{{- end -}}
+				{{- if findRE `<code` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/code.css")) -}}
+				{{- end -}}
+				{{- if findRE `<del` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/del.css")) -}}
+				{{- end -}}
+				{{- if findRE `<hr` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/hr.css")) -}}
+				{{- end -}}
+				{{- if findRE `<sup` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/footnotes.css")) -}}
+				{{- end -}}
+				{{- if findRE `<blockquote` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/quotes.css")) -}}
+				{{- end -}}
+				{{- if findRE `<table` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/tables.css")) -}}
+				{{- end -}}
+				{{- if findRE `<pre` . 1 -}}
+					{{- $.Scratch.Add `content-css` (slice (resources.Get "css/opt/pre.css")) -}}
+				{{- end -}}
+			{{- end -}}
+			
+			{{/* RETURN */}}
+			{{- range .Scratch.Get `content-css` -}}
+				{{- .Content | safeCSS -}}
+			{{- end -}}
+		</style>
+		{{- partial `content` . -}}
+	</div>
+	
+	{{- if not .Params.hideFooter -}}
+		<footer class='article-footer'>	
+		
+			{{/* --- */}}
+			{{/* FOOTER LINKS */}}
+			{{/* --- */}}
+			
+			{{/* Show donation links only if links are set and donations are enabled (noDono = false) */}}
+			{{- if and
+				(not .Site.Params.noDono)
+				(and .Site.Params.kofi .Site.Params.patreon) -}}
+				{{- $kofi := `.Site.Params.kofi` -}}
+				{{- $patreon := `.Site.Params.patreon` -}}
+				<p>{{- `Support this work on ` -}}<a href='{{ $kofi }}'>{{- `Ko-Fi` -}}</a>{{- ` or ` -}}<a href='{{ $patreon }}'>{{- `Patreon` -}}</a>{{- `!` -}}</p>
+			{{- end -}}
+				<p class='js-only'><a href='/share/#&p={{- replace .RelPermalink `/` `` -}}&t={{- .Title | title -}}&d={{- partial `description` . | replaceRE `(?:$\s+|^\s+)` `` -}}'>{{- `Share this` -}}</a>{{- ` with your friends!` -}}</p>
+			
+			
+			{{/* --- */}}
+			{{/* NAVIGATION */}}
+			{{/* --- */}}
+				
+			{{- if .Params.date -}}
+				<div class='next-previous' role='navigation'>
+					{{- partial `nextprev` (dict `type` `prev` `scope` . ) -}}
+					{{- partial `nextprev` (dict `type` `next` `scope` . ) -}}
+				</div>
+			{{- end -}}
+			
+			{{/* --- */}}
+			{{/* COMMENTS */}}
+			{{/* --- */}}
+			
+			{{/* See JavaScript section for how this conditional works */}}
+			{{- if and
+				(.Site.DisqusShortname)
+				(or (.Params.forceComments) (not .Params.hideFooter)) -}}
+				<div id='disqus-loader'><a href='javascript:startDisqus();' class='js-only'>Load Comments</a></div>
+				<div id='disqus_thread'></div>
+			{{- end -}}
+		</footer>
+	{{- end -}}
+{{- end -}}
